@@ -30,10 +30,24 @@ load_tester.py   — async concurrent load testing
 | Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/health` | GET | Server status and uptime |
-| `/predict` | POST | Ask a question, get answer |
-| `/metrics` | GET | Latency stats and request history |
+| `/predict` | POST | Fast retrieval-only answer (62ms) |
+| `/predict/llm` | POST | Full RAG answer via Llama3.2 (6-10s) |
+| `/metrics` | GET | Latency stats, request history |
 | `/sources` | GET | List loaded documents |
 
+## Sample LLM Response
+
+```json
+{
+  "request_id": "ba8e3959",
+  "question": "who created linux and when",
+  "answer": "Linus Torvalds in 1991.",
+  "sources": ["linux_basics.txt"],
+  "chunks_used": 2,
+  "llm_latency_ms": 6853.76,
+  "total_latency_ms": 6888.42
+}
+```
 ## Performance
 
 Tested with 20 concurrent requests:
