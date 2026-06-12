@@ -1,0 +1,1 @@
+Linux is an open source operating system kernel. It was created by Linus Torvalds in 1991. Linux powers most of the world's servers, supercomputers, and Android devices. Key concepts include processes, file systems, and system calls.
