@@ -1,1 +1,21 @@
 {"request_id": "479bb060", "question": "what is machine learning", "latency_ms": 62.24, "sources": ["ml_basics.txt"], "timestamp": "2026-06-12 06:53:38"}
+{"request_id": "b0740ea0", "question": "what is artificial intelligence", "latency_ms": 77.93, "sources": ["ml_basics.txt"], "timestamp": "2026-06-12 07:01:25"}
+{"request_id": "94350e87", "question": "what are python libraries", "latency_ms": 88.17, "sources": ["python_basics.txt"], "timestamp": "2026-06-12 07:01:25"}
+{"request_id": "bae84ae4", "question": "what is machine learning", "latency_ms": 93.61, "sources": ["ml_basics.txt"], "timestamp": "2026-06-12 07:01:25"}
+{"request_id": "16860ade", "question": "who created linux", "latency_ms": 108.76, "sources": ["linux_basics.txt", "python_basics.txt"], "timestamp": "2026-06-12 07:01:25"}
+{"request_id": "38add97f", "question": "what is reinforcement learning", "latency_ms": 109.73, "sources": ["ml_basics.txt"], "timestamp": "2026-06-12 07:01:25"}
+{"request_id": "505cfcda", "question": "who created linux", "latency_ms": 83.66, "sources": ["linux_basics.txt", "python_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
+{"request_id": "56434b7f", "question": "what is supervised learning", "latency_ms": 110.37, "sources": ["ml_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
+{"request_id": "6f48386e", "question": "what are neural networks", "latency_ms": 107.87, "sources": ["ml_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
+{"request_id": "a980c783", "question": "tell me about operating systems", "latency_ms": 123.52, "sources": ["linux_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
+{"request_id": "efa3d687", "question": "what is machine learning", "latency_ms": 117.87, "sources": ["ml_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
+{"request_id": "46e0b957", "question": "what is supervised learning", "latency_ms": 71.35, "sources": ["ml_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
+{"request_id": "5b4a692f", "question": "what is artificial intelligence", "latency_ms": 97.35, "sources": ["ml_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
+{"request_id": "c16270ef", "question": "tell me about operating systems", "latency_ms": 114.29, "sources": ["linux_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
+{"request_id": "45ba161f", "question": "what is reinforcement learning", "latency_ms": 113.67, "sources": ["ml_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
+{"request_id": "a2ca337a", "question": "what are python libraries", "latency_ms": 120.53, "sources": ["python_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
+{"request_id": "14b58b72", "question": "what is reinforcement learning", "latency_ms": 77.92, "sources": ["ml_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
+{"request_id": "cf4a64d5", "question": "what are python libraries", "latency_ms": 88.01, "sources": ["python_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
+{"request_id": "19f8291f", "question": "what are neural networks", "latency_ms": 89.16, "sources": ["ml_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
+{"request_id": "e5d8a711", "question": "what is machine learning", "latency_ms": 92.42, "sources": ["ml_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
+{"request_id": "c249bff0", "question": "who created linux", "latency_ms": 116.32, "sources": ["linux_basics.txt", "python_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
