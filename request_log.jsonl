@@ -19,3 +19,4 @@
 {"request_id": "19f8291f", "question": "what are neural networks", "latency_ms": 89.16, "sources": ["ml_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
 {"request_id": "e5d8a711", "question": "what is machine learning", "latency_ms": 92.42, "sources": ["ml_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
 {"request_id": "c249bff0", "question": "who created linux", "latency_ms": 116.32, "sources": ["linux_basics.txt", "python_basics.txt"], "timestamp": "2026-06-12 07:01:26"}
+{"request_id": "ba8e3959", "question": "who created linux and when", "latency_ms": 6888.42, "sources": ["linux_basics.txt"], "timestamp": "2026-06-12 07:21:22", "mode": "llm"}

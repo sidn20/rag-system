@@ -1,11 +1,10 @@
 import time
 import uuid
+import json
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from retriever import RAGRetriever
 from datetime import datetime
-import json
-import os
 
 app = FastAPI(
     title="RAG System API",
@@ -13,7 +12,6 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Request/Response models
 class QueryRequest(BaseModel):
     question: str
     top_k: int = 3
@@ -67,16 +65,15 @@ def predict(request: QueryRequest):
     request_id = str(uuid.uuid4())[:8]
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-    # Log request
     request_log.append({
         "request_id": request_id,
         "question": request.question,
         "latency_ms": round(latency_ms, 2),
         "sources": result["sources"],
-        "timestamp": timestamp
+        "timestamp": timestamp,
+        "mode": "retrieval"
     })
 
-    # Save log to file
     with open("request_log.jsonl", "a") as f:
         f.write(json.dumps(request_log[-1]) + "\n")
 
@@ -90,13 +87,52 @@ def predict(request: QueryRequest):
         timestamp=timestamp
     )
 
+@app.post("/predict/llm")
+def predict_with_llm(request: QueryRequest):
+    if not request.question.strip():
+        raise HTTPException(status_code=400, detail="Question cannot be empty")
+
+    start = time.perf_counter()
+    result = rag.answer_with_llm(request.question, top_k=request.top_k)
+    latency_ms = (time.perf_counter() - start) * 1000
+
+    request_id = str(uuid.uuid4())[:8]
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+    request_log.append({
+        "request_id": request_id,
+        "question": request.question,
+        "latency_ms": round(latency_ms, 2),
+        "sources": result["sources"],
+        "timestamp": timestamp,
+        "mode": "llm"
+    })
+
+    with open("request_log.jsonl", "a") as f:
+        f.write(json.dumps(request_log[-1]) + "\n")
+
+    return {
+        "request_id": request_id,
+        "question": request.question,
+        "answer": result["answer"],
+        "sources": result["sources"],
+        "chunks_used": result["chunks_used"],
+        "llm_latency_ms": result["llm_latency_ms"],
+        "total_latency_ms": round(latency_ms, 2),
+        "timestamp": timestamp
+    }
+
 @app.get("/metrics")
 def metrics():
     if not request_log:
         return {"message": "No requests yet"}
     latencies = [r["latency_ms"] for r in request_log]
+    llm_requests = [r for r in request_log if r.get("mode") == "llm"]
+    retrieval_requests = [r for r in request_log if r.get("mode") == "retrieval"]
     return {
         "total_requests": len(request_log),
+        "llm_requests": len(llm_requests),
+        "retrieval_requests": len(retrieval_requests),
         "avg_latency_ms": round(sum(latencies) / len(latencies), 2),
         "min_latency_ms": round(min(latencies), 2),
         "max_latency_ms": round(max(latencies), 2),
