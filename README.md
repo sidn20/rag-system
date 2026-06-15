@@ -63,6 +63,21 @@ Tested with 20 concurrent requests:
 ## Quick Start
 
 ```bash
+
+## Docker
+
+```bash
+
+# Build
+docker build -t rag-system:v1 .
+
+# Run
+docker run -p 8000:8000 rag-system:v1
+
+# Test
+curl http://localhost:8000/health
+```
+
 # Install dependencies
 pip3 install sentence-transformers faiss-cpu fastapi uvicorn aiohttp
 
