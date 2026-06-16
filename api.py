@@ -1,3 +1,5 @@
+from fastapi import FastAPI, HTTPException, UploadFile, File
+import os
 import time
 import uuid
 import json
@@ -144,7 +146,43 @@ def sources():
     import os
     docs = os.listdir("documents")
     return {"documents_loaded": docs, "total": len(docs)}
+@app.post("/upload")
+async def upload_document(file: UploadFile = File(...)):
+    """
+    Upload a text file, chunk it, embed it, and add to vector store.
+    No container rebuild needed — documents indexed instantly.
+    """
+    if not file.filename.endswith(".txt"):
+        raise HTTPException(status_code=400, detail="Only .txt files supported currently")
 
+    # Save uploaded file to documents folder
+    save_path = os.path.join("documents", file.filename)
+    content = await file.read()
+    
+    with open(save_path, "wb") as f:
+        f.write(content)
+
+    # Chunk the new document
+    from chunker import chunk_text
+    text = content.decode("utf-8")
+    chunks = chunk_text(text, source=file.filename)
+
+    if not chunks:
+        raise HTTPException(status_code=400, detail="No content could be extracted")
+
+    # Embed and add to vector store
+    embedded = rag.embedder.embed_chunks(chunks)
+    rag.store.add(embedded)
+
+    # Save updated vector store
+    rag.store.save("vector_store")
+
+    return {
+        "message": f"Document indexed successfully",
+        "filename": file.filename,
+        "chunks_created": len(chunks),
+        "total_vectors": rag.store.index.ntotal
+    }
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
